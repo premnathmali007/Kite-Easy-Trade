@@ -1,11 +1,15 @@
 <html>
 <head>
-  <title>Kite Analytics</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Kite Analytics</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <?php
@@ -132,14 +136,88 @@ if (count($trades)>0) {
 }
 ?>
 <h1>Trade analytics</h1>
-<?php
-echo "<h4>Count of orders : " . count($orders) . "</h4>";
-echo "<h4>Count of trades : " . count($trades) . "</h4>";
-echo "<h4>Count of trades should be : " . count($orders)/2 . "</h4>";
-    foreach ($analytics as $key => $value) {
-        echo "<h4>" . ucwords(str_replace("_", " ", $key)) . " : " . $value . "</h4>";
-    }
-?>
+<div class="container">
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Start Date : " . $analytics["start_date"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Start Date : " . $analytics["end_date"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Working Days : " . $analytics["working_days"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Count of trades : " . count($trades) . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total wins : " . $analytics["total_wins"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-danger">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total losses : " . $analytics["total_losses"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total Long trades : " . $analytics["number_of_long_trades"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total Long Wins : " . $analytics["long_wins"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-danger">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total Long Losses : " . $analytics["long_losses"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total Short trades : " . $analytics["number_of_short_trades"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total Short Wins : " . $analytics["short_wins"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-danger">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Total Short Losses : " . $analytics["short_losses"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Win Rate : " . $analytics["win_rate"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-<?php echo $analytics["total_pnl"]>0 ? 'success' : 'danger';?>">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Final PNL : " . $analytics["total_pnl"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="center">
   <h3 style="text-align: center;">All Trades</h3>
 </div>
