@@ -41,9 +41,17 @@ $conn->close();
 
 //build jurnal
 $trades = [];
+$pnlPerDay = [];
+$timePerTrade = [];
 $analytics = [
     "start_date" => "",
     "end_date" => "",
+    "max_profit" => 0,
+    "max_loss" => 0,
+    "max_day_profit" => 0,
+    "max_day_loss" => 0,
+    "max_time" => 0,
+    "min_time" => 100000,
     "number_of_long_trades" => 0,
     "number_of_short_trades" => 0,
     "long_wins" => 0,
@@ -71,7 +79,8 @@ foreach ($orders as $i => $order) {
             //calculate trade time
             $date1 = new DateTime($order["order_execution_time"]);
             $date2 = new DateTime($orders[$j]["order_execution_time"]);
-            $tradeExecutionTime = abs($date1->getTimestamp() - $date2->getTimestamp()) / 60;
+            $tradeExecutionTime = round(abs($date1->getTimestamp() - $date2->getTimestamp()) / 60,2);
+            $timePerTrade[]=$tradeExecutionTime;
 
             //get buy and sell price
             $buyPrice = $order["trade_type"] == "buy" ? $order["price"] : $orders[$j]["price"];
@@ -100,10 +109,16 @@ foreach ($orders as $i => $order) {
                 $currentDate=$order["trade_date"];
                 $analytics["working_days"]++;
             }
-
+            $pnlPerDay[$order["trade_date"]] = isset($pnlPerDay[$order["trade_date"]]) ? $pnlPerDay[$order["trade_date"]] + $pnl : $pnl;
             if ($pnl>0) {
+                if ($pnl > $analytics["max_profit"]){
+                    $analytics["max_profit"] = $pnl;
+                }
                 $analytics["total_wins"] += 1;
             } else {
+                if ($pnl < $analytics["max_loss"]){
+                    $analytics["max_loss"] = $pnl;
+                }
                 $analytics["total_losses"] += 1;
             }
 
@@ -118,7 +133,7 @@ foreach ($orders as $i => $order) {
                 "trade_type" => $tradeType,
 //                "order_details" => [[$order["order_id"], $order["order_execution_time"]], [$orders[$j]["order_id"], $orders[$j]["order_execution_time"]]],
                 "order_execution_time" => $order["order_execution_time"],
-                "order_time" => round($tradeExecutionTime),
+                "order_time" => $tradeExecutionTime,
                 "quantity" => $order["quantity"],
                 "buy_price" => $buyPrice,
                 "sell_price" => $sellPrice,
@@ -133,10 +148,14 @@ if (count($trades)>0) {
     $analytics["start_date"] = $trades[0]["trade_date"];
     $analytics["end_date"] = $trades[count($trades)-1]["trade_date"];
     $analytics["win_rate"] = $analytics["total_wins"] / count($trades) * 100;
+    $analytics["max_day_profit"] = max($pnlPerDay);
+    $analytics["max_day_loss"] = min($pnlPerDay);
+    $analytics["max_time"] = max($timePerTrade);
+    $analytics["min_time"] = min($timePerTrade);
 }
 ?>
-<h1>Trade analytics</h1>
 <div class="container">
+    <br><h1 style="text-align: center;">Trade analytics</h1>
     <div class="card-columns">
         <div class="card bg-info">
             <div class="card-body text-center">
@@ -145,7 +164,7 @@ if (count($trades)>0) {
         </div>
         <div class="card bg-info">
             <div class="card-body text-center">
-                <p class="card-text"><?php echo "<h4>Start Date : " . $analytics["end_date"] . "</h4>"; ?></p>
+                <p class="card-text"><?php echo "<h4>End Date : " . $analytics["end_date"] . "</h4>"; ?></p>
             </div>
         </div>
         <div class="card bg-info">
@@ -208,6 +227,62 @@ if (count($trades)>0) {
     <div class="card-columns">
         <div class="card bg-info">
             <div class="card-body text-center">
+                <p class="card-text"><h4>Max Profit / Loss For Per Trade</h4></p>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Max Profit Per Trade : " . $analytics["max_profit"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-danger">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Max Loss Per Trade : " . $analytics["max_loss"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><h4>Max Profit / Loss For Per Day</h4></p>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Max Profit Per Day : " . $analytics["max_day_profit"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-danger">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Max Loss Per Day : " . $analytics["max_day_loss"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><h4>Trade time</h4></p>
+            </div>
+        </div>
+        <div class="card bg-success">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Min Time Taken Trade : " . $analytics["min_time"] . "</h4>"; ?></p>
+            </div>
+        </div>
+        <div class="card bg-danger">
+            <div class="card-body text-center">
+                <p class="card-text"><?php echo "<h4>Max Time Taken Trade : " . $analytics["max_time"] . "</h4>"; ?></p>
+            </div>
+        </div>
+    </div>
+    <div class="card-columns">
+        <div class="card bg-info">
+            <div class="card-body text-center">
+                <p class="card-text"><h4>Final Analytics : </h4></p>
+            </div>
+        </div>
+        <div class="card bg-info">
+            <div class="card-body text-center">
                 <p class="card-text"><?php echo "<h4>Win Rate : " . $analytics["win_rate"] . "</h4>"; ?></p>
             </div>
         </div>
@@ -218,8 +293,9 @@ if (count($trades)>0) {
         </div>
     </div>
 </div>
+<br><br>
 <div class="center">
-  <h3 style="text-align: center;">All Trades</h3>
+  <h1 style="text-align: center;">All Trades</h1>
 </div>
 
 <table  class="table table-bordered">
@@ -253,9 +329,14 @@ if (count($trades)>0) {
 </body>
 </html>
 
-<styles>
-.center {
-  text-align: center;
-  border: 3px solid green;
-}
-</styles>
+<style>
+    .center {
+      text-align: center;
+      border: 3px solid green;
+    }
+    .container{
+        max-width: none !important;
+        width: 100%;
+        margin: 5px 5px 5px 5px;
+    }
+</style>
