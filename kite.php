@@ -1,7 +1,17 @@
+<html>
+<head>
+  <title>Kite Analytics</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
 <?php
 $servername = "localhost";
-$username = "root";
-$password = "root";
+$username = "prem";
+$password = "prem";
 $dbname = "kite_practice";
 
 // Create connection
@@ -66,7 +76,7 @@ foreach ($orders as $i => $order) {
             //Calculate pnl
             $qty = $order["quantity"];
             $pnl = $buyPrice < $sellPrice ? ($sellPrice - $buyPrice) * $qty : ($sellPrice - $buyPrice) * $qty;
-
+			$pnl = round($pnl,2);
             //calculate $analytics
             $tradeType = $order["trade_type"] == "buy" ? "Long" : "Short";
             $analytics["total_pnl"] = $analytics["total_pnl"] + $pnl;
@@ -121,19 +131,20 @@ if (count($trades)>0) {
     $analytics["win_rate"] = $analytics["total_wins"] / count($trades) * 100;
 }
 ?>
-<h1>Trade analytics</h1><br>
+<h1>Trade analytics</h1>
 <?php
-echo "<h2>Count of orders : " . count($orders) . "</h2>";
-echo "<h2>Count of trades : " . count($trades) . "</h2>";
-echo "<h2>Count of trades should be : " . count($orders)/2 . "</h2>>";
+echo "<h4>Count of orders : " . count($orders) . "</h4>";
+echo "<h4>Count of trades : " . count($trades) . "</h4>";
+echo "<h4>Count of trades should be : " . count($orders)/2 . "</h4>";
     foreach ($analytics as $key => $value) {
-        echo "<h2>" . ucwords(str_replace("_", " ", $key)) . " : " . $value . "</h2>";
+        echo "<h4>" . ucwords(str_replace("_", " ", $key)) . " : " . $value . "</h4>";
     }
 ?>
-<br>
-<h1>All Trades</h1>
-<br>
-<table>
+<div class="center">
+  <h3 style="text-align: center;">All Trades</h3>
+</div>
+
+<table  class="table table-bordered">
     <thead>
     <?php
     $columns = array_keys($trades[0]);
@@ -149,7 +160,8 @@ echo "<h2>Count of trades should be : " . count($orders)/2 . "</h2>>";
     <tbody>
     <?php
     foreach ($trades as $trade) {
-        echo "<tr>";
+		$trClass = $trade["pnl"]>0 ? "success" : "danger"; 
+        echo '<tr class="' . $trClass . '" >';  		
         foreach ($trade as $key => $value) {
             echo "<td>";
             echo $value;
@@ -160,3 +172,12 @@ echo "<h2>Count of trades should be : " . count($orders)/2 . "</h2>>";
     ?>
     </tbody>
 </table>
+</body>
+</html>
+
+<styles>
+.center {
+  text-align: center;
+  border: 3px solid green;
+}
+</styles>
