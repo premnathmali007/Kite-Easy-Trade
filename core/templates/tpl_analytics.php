@@ -1,18 +1,10 @@
-<html>
-<head>
-    <title>Kite Analytics</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-</head>
+<?php
+//include header
+include_once("common_header.php");
+?>
 <body>
 <?php
+
 $servername = "localhost";
 $username = "prem";
 $password = "prem";
@@ -89,7 +81,7 @@ foreach ($orders as $i => $order) {
             //Calculate pnl
             $qty = $order["quantity"];
             $pnl = $buyPrice < $sellPrice ? ($sellPrice - $buyPrice) * $qty : ($sellPrice - $buyPrice) * $qty;
-			$pnl = round($pnl,2);
+            $pnl = round($pnl,2);
             //calculate $analytics
             $tradeType = $order["trade_type"] == "buy" ? "Long" : "Short";
             $analytics["total_pnl"] = $analytics["total_pnl"] + $pnl;
@@ -295,7 +287,7 @@ if (count($trades)>0) {
 </div>
 <br><br>
 <div class="center">
-  <h1 style="text-align: center;">All Trades</h1>
+    <h1 style="text-align: center;">All Trades</h1>
 </div>
 
 <table  class="table table-bordered">
@@ -314,8 +306,8 @@ if (count($trades)>0) {
     <tbody>
     <?php
     foreach ($trades as $trade) {
-		$trClass = $trade["pnl"]>0 ? "success" : "danger"; 
-        echo '<tr class="' . $trClass . '" >';  		
+        $trClass = $trade["pnl"]>0 ? "success" : "danger";
+        echo '<tr class="' . $trClass . '" >';
         foreach ($trade as $key => $value) {
             echo "<td>";
             echo $value;
@@ -327,16 +319,3 @@ if (count($trades)>0) {
     </tbody>
 </table>
 </body>
-</html>
-
-<style>
-    .center {
-      text-align: center;
-      border: 3px solid green;
-    }
-    .container{
-        max-width: none !important;
-        width: 100%;
-        margin: 5px 5px 5px 5px;
-    }
-</style>
