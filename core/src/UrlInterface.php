@@ -13,7 +13,7 @@ class UrlInterface
     {
         $connection = new Connection();
         $this->connection = $connection->getConnection();
-        $this->baseUrl = $this->connection->select("core_config_data",[],["value"],["path","base_url"]);
+        $this->baseUrl = $this->connection->query("SELECT value FROM core_config_data WHERE path = 'base_url'")->fetchColumn();
     }
 
     public function getBaseUrl() {
