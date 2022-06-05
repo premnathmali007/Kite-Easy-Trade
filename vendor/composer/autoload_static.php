@@ -11,6 +11,10 @@ class ComposerStaticInited11d2c103e46b1330a11d7a5063bad8
         array (
             'Medoo\\' => 6,
         ),
+        'C' =>
+            array (
+                'Core\\' => 6,
+                ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -18,6 +22,10 @@ class ComposerStaticInited11d2c103e46b1330a11d7a5063bad8
         array (
             0 => __DIR__ . '/..' . '/catfan/medoo/src',
         ),
+        'Core\\' =>
+            array (
+                0 => __DIR__ . '/../../' . '/core/src',
+            ),
     );
 
     public static function getInitializer(ClassLoader $loader)

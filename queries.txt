@@ -5,3 +5,6 @@ INSERT INTO tradebook_real SELECT entity_id, symbol, isin, trade_date, exchange,
 Update trade date
 UPDATE `tradebook` SET trade_date=SUBSTRING(order_execution_time FROM 1 FOR CHAR_LENGTH(order_execution_time) - 9)
 
+CREATE TABLE `kite_practice`.`core_config_data` ( `entity_id` INT NOT NULL , `path` VARCHAR(255) NOT NULL , `value` VARCHAR(255) NOT NULL , PRIMARY KEY (`entity_id`)) ENGINE = InnoDB COMMENT = 'App core config data';
+INSERT INTO `core_config_data` (`entity_id`, `path`, `value`) VALUES ('', 'base_url', 'http://learnreact.loc/')
+
