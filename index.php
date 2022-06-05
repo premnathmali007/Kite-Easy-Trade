@@ -15,7 +15,12 @@ include_once($app_path_templates . "common_header.php");
     switch ($action) {
         case "import_tradebook":
             $importTrabook = new Core\ImportTradebook();
-            $importTrabook->execute();
+            $result = $importTrabook->execute();
+            if ($result){
+                echo "<div class='alert alert-success'>
+                        <strong>Success!</strong> Trades imported successfully.
+                    </div>";
+            }
             break;
     }
     switch ($page) {

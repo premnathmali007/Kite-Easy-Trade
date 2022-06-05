@@ -69,6 +69,7 @@ class ImportTradebook
     public function execute() {
         $tradebook = $this->readCsvFile();
         $this->importTradebook($tradebook);
+        return true;
     }
 
     private function importTradebook($tradebook) {

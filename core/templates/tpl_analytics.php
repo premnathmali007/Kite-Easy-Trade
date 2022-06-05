@@ -9,7 +9,9 @@ if (count($trades)>0) {
 ?>
 
 <div class="container mt-3" >
-    <form name="frm-analytics" action="/?&show=analytics" method="POST" enctype="multipart/form-data" class="p-5 border border-primary">
+    <form name="frm-analytics"
+          action="<?php echo $urlInterface->getBaseUrl() . '?&show=analytics';?>"
+          method="POST" enctype="multipart/form-data" class="p-5 border border-primary">
         <div class="mb-3">
             <label for="from" class="form-label">From</label>
             <input name="from" id="from" type="date" class="datepicker" data-date-format="mm/dd/yyyy" value="<?php echo $analytics["start_date"];?>">
