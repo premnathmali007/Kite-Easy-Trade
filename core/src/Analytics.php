@@ -34,7 +34,7 @@ class Analytics
                 $where = " WHERE trade_date <= '$to'";
             }
         }
-        $sql .= $where;
+        $sql .= $where . " ORDER BY order_execution_time ASC";
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         $orders = [];
