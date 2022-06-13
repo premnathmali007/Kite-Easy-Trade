@@ -73,8 +73,8 @@ if (count($trades)>0) {
 <div class="center">
     <h1 style="text-align: center;">All Trades</h1>
 </div>
-
-<table  class="table table-bordered">
+<div class="container-fluid">
+<table id="tradebook_real" class="table table-bordered" style="border-collapse: collapse">
     <thead>
     <?php
     $columns = array_keys($trades[0]);
@@ -90,7 +90,7 @@ if (count($trades)>0) {
     <tbody>
     <?php
     foreach ($trades as $trade) {
-        $trClass = $trade["pnl"]>0 ? "success" : "danger";
+        $trClass = $trade["pnl"]>0 ? "profit-green" : "loss-red";
         echo '<tr class="' . $trClass . '" >';
         foreach ($trade as $key => $value) {
             echo "<td>";
@@ -102,7 +102,14 @@ if (count($trades)>0) {
     ?>
     </tbody>
 </table>
+</div>
 <?php } else {
     echo "No trades!";
 }
 ?>
+
+<script>
+    $(document).ready(function () {
+        $('#tradebook_real').DataTable();
+    });
+</script>
