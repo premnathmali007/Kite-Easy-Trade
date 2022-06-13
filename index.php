@@ -18,7 +18,16 @@ include_once($app_path_templates . "common_header.php");
             $result = $importTrabook->execute();
             if ($result){
                 echo "<div class='alert alert-success'>
-                        <strong>Success!</strong> Trades imported successfully.
+                        <strong>Success!</strong> Trades Imported Successfully.
+                    </div>";
+            }
+            break;
+        case "import_fund_statement":
+            $importFundStatement = new Core\ImportFundStatement();
+            $result = $importFundStatement->execute();
+            if ($result){
+                echo "<div class='alert alert-success'>
+                        <strong>Success!</strong> Fund Statement Imported Successfully.
                     </div>";
             }
             break;
@@ -29,6 +38,9 @@ include_once($app_path_templates . "common_header.php");
             break;
         case "import_tradebook":
             require_once($app_path_templates . "tpl_import_tradebook.php");
+            break;
+        case "import_fund_statement":
+            require_once($app_path_templates . "tpl_import_fund_statement.php");
             break;
         default:
             require_once($app_path_templates . "tpl_analytics.php");

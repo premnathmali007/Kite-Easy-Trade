@@ -31,6 +31,10 @@ class UrlInterface
         return $this->baseUrl . "?show=import_tradebook";
     }
 
+    public function getImportFundStatementUrl() {
+        return $this->baseUrl . "?show=import_fund_statement";
+    }
+
     public function getShowTradebookUrl() {
         return $this->baseUrl . "?show=tradebook";
     }

@@ -62,7 +62,6 @@ class ImportTradebook
             }
             fclose($file);
         }
-        array_shift($tradeBook);
         return $tradeBook;
     }
 
