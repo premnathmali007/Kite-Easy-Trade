@@ -1,3 +1,9 @@
+#create user
+CREATE USER 'prem'@'localhost' IDENTIFIED BY 'prem';
+GRANT ALL PRIVILEGES ON kite_practice.* To 'prem'@'localhost';
+FLUSH PRIVILEGES;
+
+
 Real tradebook;
 DELETE FROM tradebook_real;
 INSERT INTO tradebook_real SELECT entity_id, symbol, isin, trade_date, exchange, segment, series, trade_type, SUM(quantity) AS quantity, SUM(price)/COUNT(*) AS price, trade_id, order_id, order_execution_time FROM `tradebook` GROUP BY order_id ORDER BY entity_id;
