@@ -144,7 +144,8 @@ if (count($trades) > 0) {
     $(document).ready(function () {
         $('#backtest_tradebook').DataTable({
             "lengthMenu": [ 10, 25, 50, 75, 100 ],
-            "pageLength": 50
+            "pageLength": 50,
+            order: [[0, 'desc']]
         });
         var currentTrade = <?php if(isset($currentTrade)){echo json_encode($currentTrade);} else{echo "[]";} ?>;
         $.each(currentTrade, function( key, value ) {
