@@ -88,8 +88,6 @@ if (isset($_GET["date"])){
                        for="setup<?php echo $setup['entity_id']; ?>"><?php echo $setup['setup']; ?></label>
             </div>
         <?php } ?>
-        <label for="setup[]" class="error">Please select at least two types of spam.</label>
-
         <div class="mb-3">
             <label for="notes" class="form-label">Notes</label>
             <textarea class="form-control" id="notes" name="notes" rows="3"></textarea>
@@ -144,7 +142,10 @@ if (count($trades) > 0) {
 ?>
 <script>
     $(document).ready(function () {
-        $('#backtest_tradebook').DataTable();
+        $('#backtest_tradebook').DataTable({
+            "lengthMenu": [ 10, 25, 50, 75, 100 ],
+            "pageLength": 50
+        });
         var currentTrade = <?php if(isset($currentTrade)){echo json_encode($currentTrade);} else{echo "[]";} ?>;
         $.each(currentTrade, function( key, value ) {
             console.log('caste: ' + key + ' | id: ' +value);

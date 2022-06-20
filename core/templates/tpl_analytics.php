@@ -110,6 +110,9 @@ if (count($trades)>0) {
 
 <script>
     $(document).ready(function () {
-        $('#tradebook_real').DataTable();
+        $('#tradebook_real').DataTable({
+            "lengthMenu": [ 10, 25, 50, 75, 100 ],
+            "pageLength": 50
+        });
     });
 </script>

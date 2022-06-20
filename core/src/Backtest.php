@@ -70,7 +70,7 @@ class Backtest
                 $where = " WHERE date <= '$to'";
             }
         }
-        $sql .= $where . " ORDER BY entity_id ASC";
+        $sql .= $where . " ORDER BY entity_id DESC";
         $result = $this->connection->query($sql);
         $rows = $result->fetchAll();
         $trades=[];
