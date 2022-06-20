@@ -16,6 +16,9 @@
                     <a class="nav-link" href="<?php echo $urlInterface->getShowBacktestUrl();?>">Backtest</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $urlInterface->getShowDailyTradesUrl();?>">Daily Trades</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo $urlInterface->getImportTradebookUrl();?>">Import Tradebook</a>
                 </li>
                 <li class="nav-item">

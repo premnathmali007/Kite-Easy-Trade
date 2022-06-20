@@ -4,7 +4,7 @@ namespace Core;
 
 class VersionControl
 {
-    const NEW_VERSION = "1.0.1";
+    const NEW_VERSION = "1.0.2";
     /**
      * @var Connection
      */
@@ -39,6 +39,10 @@ class VersionControl
             $this->createSymbolTable();
             $this->createBacktestTradesTable();
             $this->updateCurrentVersion('1.0.1');
+        }
+        if (version_compare($currentVersion,self::NEW_VERSION, '<')) {
+            $this->createDailyTradesTable();
+            $this->updateCurrentVersion('1.0.2');
         }
     }
 
@@ -91,6 +95,21 @@ class VersionControl
             `setup` TEXT NOT NULL , `points` INT(11) NOT NULL , 
             `notes` TEXT NOT NULL , 
             PRIMARY KEY (`entity_id`)) ENGINE = InnoDB COMMENT = 'Backtest Trades'";
+        $this->connection->query($query);
+    }
+
+    public function createDailyTradesTable() {
+        $query = "CREATE TABLE IF NOT EXISTS `kite_practice`.`daily_trades` ( 
+            `entity_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Entity_id' ,
+            `date` DATE NOT NULL ,
+            `symbol` VARCHAR(255) NOT NULL DEFAULT 'NIFTY' ,
+            `trade_type` ENUM('long','short') NOT NULL DEFAULT 'long' ,
+            `qty` INT(11) NOT NULL DEFAULT '1' ,
+            `lot_size` INT(11) NOT NULL DEFAULT '50',
+            `ratio` VARCHAR(255) NOT NULL DEFAULT '1:2',
+            `setup` TEXT NOT NULL , `points` INT(11) NOT NULL , 
+            `notes` TEXT NOT NULL , 
+            PRIMARY KEY (`entity_id`)) ENGINE = InnoDB COMMENT = 'Daily Trades'";
         $this->connection->query($query);
     }
 }

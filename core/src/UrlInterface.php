@@ -46,4 +46,12 @@ class UrlInterface
     public function getShowBacktestUrl() {
         return $this->baseUrl . "?show=backtest";
     }
+
+    public function getAddDailyTradeUrl() {
+        return $this->baseUrl . "?action=add_daily_trade&show=daily_trades";
+    }
+
+    public function getShowDailyTradesUrl() {
+        return $this->baseUrl . "?show=daily_trades";
+    }
 }

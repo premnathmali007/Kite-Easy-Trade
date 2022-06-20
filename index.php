@@ -42,6 +42,17 @@ include_once($app_path_templates . "common_header.php");
                 echo "<div class='alert alert-danger'>$errorMsg</div>";
             }
             break;
+        case "add_daily_trade":
+            $dailyTrade = new Core\DailyTrade();
+            $result = $dailyTrade->addDailyTrade();
+            $currentTrade = $result["current_trade"];
+            if ($result["status"]){
+                header("Location: " . $urlInterface->getShowDailyTradesUrl() . "&import_trade=success&date=" . $_POST["date"]);
+            } else {
+                $errorMsg = $result["message"];
+                echo "<div class='alert alert-danger'>$errorMsg</div>";
+            }
+            break;
     }
     switch ($page) {
         case "analytics":
@@ -49,6 +60,9 @@ include_once($app_path_templates . "common_header.php");
             break;
         case "backtest":
             require_once($app_path_templates . "tpl_backtest.php");
+            break;
+        case "daily_trades":
+            require_once($app_path_templates . "tpl_daily_trades.php");
             break;
         case "import_tradebook":
             require_once($app_path_templates . "tpl_import_tradebook.php");
