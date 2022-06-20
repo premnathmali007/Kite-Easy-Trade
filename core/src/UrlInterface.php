@@ -38,4 +38,12 @@ class UrlInterface
     public function getShowTradebookUrl() {
         return $this->baseUrl . "?show=tradebook";
     }
+
+    public function getAddBackTestTradeUrl() {
+        return $this->baseUrl . "?action=add_backtest_trade&show=backtest";
+    }
+
+    public function getShowBacktestUrl() {
+        return $this->baseUrl . "?show=backtest";
+    }
 }

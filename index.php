@@ -31,10 +31,24 @@ include_once($app_path_templates . "common_header.php");
                     </div>";
             }
             break;
+        case "add_backtest_trade":
+            $backtest = new Core\Backtest();
+            $result = $backtest->addBackTestTrade();
+            $currentTrade = $result["current_trade"];
+            if ($result["status"]){
+                header("Location: " . $urlInterface->getShowBacktestUrl() . "&import_trade=success&date=" . $_POST["date"]);
+            } else {
+                $errorMsg = $result["message"];
+                echo "<div class='alert alert-danger'>$errorMsg</div>";
+            }
+            break;
     }
     switch ($page) {
         case "analytics":
             require_once($app_path_templates . "tpl_analytics.php");
+            break;
+        case "backtest":
+            require_once($app_path_templates . "tpl_backtest.php");
             break;
         case "import_tradebook":
             require_once($app_path_templates . "tpl_import_tradebook.php");

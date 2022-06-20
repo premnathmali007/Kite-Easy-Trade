@@ -1,9 +1,9 @@
 <?php
 require 'vendor/autoload.php';
-
 use Medoo\Medoo;
 use Core\UrlInterface;
 
+require_once "version.php";
 //set error verbosity
 ini_set('display_errors',1);
 ini_set('display_startup_errors',1);

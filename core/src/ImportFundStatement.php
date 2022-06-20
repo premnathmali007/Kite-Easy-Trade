@@ -82,15 +82,7 @@ class ImportFundStatement
         return $ledger;
     }
 
-    private function createTableIfNotExist() {
-        $query = "CREATE TABLE IF NOT EXISTS `kite_practice`.`"
-            . self::TBL_FUND_STATEMENT
-            . "` ( `entity_id` INT NOT NULL , `particulars` VARCHAR(255) NULL , `posting_date` DATE NULL , `cost_center` VARCHAR(255) NULL , `voucher_type` VARCHAR(255) NULL , `debit` DECIMAL(10,4) NULL , `credit` DECIMAL(10,4) NULL , `net_balance` DECIMAL(10,4) NULL , PRIMARY KEY (`entity_id`)) ENGINE = InnoDB";
-        $this->connection->query($query);
-    }
-
     public function execute() {
-        $this->createTableIfNotExist();
         $ledger = $this->readCsvFile();
         $this->importLedger($ledger);
         return true;
