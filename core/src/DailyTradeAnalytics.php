@@ -27,7 +27,7 @@ class DailyTradeAnalytics extends TradeAnalytics
     public function getDailyTradeAnalytics() {
         $from = isset($_POST["from"]) ? $_POST["from"] : false;
         $to = isset($_POST["to"]) ? $_POST["to"] : false;
-        $qty = isset($_POST["qty"]) ? $_POST["qty"] : 100;
+        $qty = isset($_POST["qty"]) ? $_POST["qty"] : 50;
         $type = isset($_GET["type"]) ? $_GET["type"] : "daily_trades";
         $sql = "SELECT * FROM ";
         if ($type=="daily_trades") {
