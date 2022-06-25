@@ -6,6 +6,7 @@ $trades = $dailyTrade->getDailyTrades();
 $resource = new Resource();
 $setups = $resource->getSetups();
 $symbols = $resource->getSymbols();
+$setupWiseTrades = [];
 if (isset($_GET["import_trade"])){
     echo "<div class='alert alert-success'><strong>Success!</strong> Trade Added Successfully.</div>";
     unset($_GET["import_trade"]);
@@ -148,7 +149,7 @@ if (count($trades) > 0) {
         $('#daily_tradebook').DataTable({
             "lengthMenu": [ 10, 25, 50, 75, 100 ],
             "pageLength": 50,
-            order: [[0, 'desc']]
+            order: [[1, 'desc']]
         });
         var currentTrade = <?php if(isset($currentTrade)){echo json_encode($currentTrade);} else{echo "[]";} ?>;
         $.each(currentTrade, function( key, value ) {

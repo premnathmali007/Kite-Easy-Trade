@@ -16,4 +16,18 @@ class Connection
             'password' => 'prem'
         ]);
     }
+
+    public function getResult($rows) {
+        $result=[];
+        foreach ($rows as $row){
+            $currentRow = [];
+            foreach ($row as $key => $value) {
+                if (is_string($key)){
+                    $currentRow[$key] = $value;
+                }
+            }
+            $result[] = $currentRow;
+        }
+        return $result;
+    }
 }

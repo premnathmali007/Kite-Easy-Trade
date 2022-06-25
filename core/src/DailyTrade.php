@@ -18,7 +18,7 @@ class DailyTrade
         $this->connection = $connection->getConnection();
     }
 
-    private function getLotSize($symbol) {
+    public function getLotSize($symbol) {
         $result = $this->connection->query("SELECT `lot_size`  FROM `trade_symbol` WHERE `symbol` = '" . $symbol . "'");
         $lotSize = $result->fetchColumn();
         return (int)$lotSize;

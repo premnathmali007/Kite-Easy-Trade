@@ -25,6 +25,10 @@
     /*    width: 100%;*/
     /*    margin: 5px 5px 5px 5px;*/
     /*}*/
+    .nav-item.active a {
+        color:white !important;
+        font-weight: bolder;
+    }
     .loss-red {
         background-color: #b16464 !important;
     }

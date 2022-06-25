@@ -54,4 +54,12 @@ class UrlInterface
     public function getShowDailyTradesUrl() {
         return $this->baseUrl . "?show=daily_trades";
     }
+
+    public function getShowDailyTradeAnalyticsUrl() {
+        return $this->baseUrl . "?show=daily_trade_analytics&type=daily_trades";
+    }
+
+    public function getShowBacktestTradeAnalyticsUrl() {
+        return $this->baseUrl . "?show=daily_trade_analytics&type=backtest_trades";
+    }
 }

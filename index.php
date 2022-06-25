@@ -64,6 +64,9 @@ include_once($app_path_templates . "common_header.php");
         case "daily_trades":
             require_once($app_path_templates . "tpl_daily_trades.php");
             break;
+        case "daily_trade_analytics":
+            require_once($app_path_templates . "tpl_daily_trade_analytics.php");
+            break;
         case "import_tradebook":
             require_once($app_path_templates . "tpl_import_tradebook.php");
             break;

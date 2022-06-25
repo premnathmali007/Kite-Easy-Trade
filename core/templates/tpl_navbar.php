@@ -6,7 +6,7 @@
         </button>
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo $urlInterface->getShowAnalyticsUrl();?>">Analytics</a>
                 </li>
                 <li class="nav-item">
@@ -16,7 +16,13 @@
                     <a class="nav-link" href="<?php echo $urlInterface->getShowBacktestUrl();?>">Backtest</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $urlInterface->getShowBacktestTradeAnalyticsUrl();?>">Backtest Trade Analytics</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo $urlInterface->getShowDailyTradesUrl();?>">Daily Trades</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo $urlInterface->getShowDailyTradeAnalyticsUrl();?>">Daily Trade Analytics</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo $urlInterface->getImportTradebookUrl();?>">Import Tradebook</a>
