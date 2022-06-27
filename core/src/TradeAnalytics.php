@@ -208,7 +208,9 @@ class TradeAnalytics
         $overall["final_analytics"]["max_profit_per_trade"]["pnl"] = max($tradesPnl); //$overall["max_profit"];
         $overall["final_analytics"]["max_loss_per_trade"]["pnl"] = min($tradesPnl);//$overall["max_loss"];
         $overall["final_analytics"]["max_profit_per_day"]["profit"] = max($dateWisePNL);
+        $overall["final_analytics"]["max_profit_per_day"]["date"] = array_keys($dateWisePNL, max($dateWisePNL))[0];
         $overall["final_analytics"]["max_loss_per_day"]["loss"] = min($dateWisePNL);
+        $overall["final_analytics"]["max_loss_per_day"]["date"] =  array_keys($dateWisePNL, min($dateWisePNL))[0];;
         $overall["final_analytics"]["pnl"] = ($overall["total_points"] * $qty) - count($allTrades) * self::BROKERAGE;
         $earlier = new \DateTime(min($tradeDates));
         $later = new \DateTime(max($tradeDates));
