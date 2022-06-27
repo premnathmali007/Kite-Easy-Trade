@@ -26,7 +26,11 @@ $type = $result["type"];
     <?php foreach ($analytics as $setup => $analysis) {?>
     <br><h1 style="text-align: center;">
             <?php
-                $headding = ucwords(str_replace("_", " ",$setup));
+                if ($setup === 0 ) {
+                    $headding = "Overall";
+                } else {
+                    $headding = ucwords(str_replace("_", " ",$setup));
+                }
                 echo $headding;
             ?>
         </h1>
@@ -37,8 +41,8 @@ $type = $result["type"];
             $setupAnalysis["losses"] = isset($setupAnalysis["losses"]) ? $setupAnalysis["losses"] : 0;
             $setupAnalysis["long_wins"] = isset($setupAnalysis["long_wins"]) ? $setupAnalysis["long_wins"] : 0;
             $setupAnalysis["long_losses"] = isset($setupAnalysis["long_losses"]) ? $setupAnalysis["long_losses"] : 0;
-            $setupAnalysis["short_wins"] = isset($setupAnalysis["long_wins"]) ? $setupAnalysis["long_wins"] : 0;
-            $setupAnalysis["short_losses"] = isset($setupAnalysis["long_losses"]) ? $setupAnalysis["long_losses"] : 0;
+            $setupAnalysis["short_wins"] = isset($setupAnalysis["short_wins"]) ? $setupAnalysis["short_wins"] : 0;
+            $setupAnalysis["short_losses"] = isset($setupAnalysis["short_losses"]) ? $setupAnalysis["short_losses"] : 0;
             $setupAnalysis["winrate"] = isset($setupAnalysis["winrate"]) ? $setupAnalysis["winrate"] : 0;
         ?>
     <div class="container mt-3">
@@ -71,9 +75,14 @@ $type = $result["type"];
                 </tr>
                 <?php }?>
                 <tr>
-                    <th class="bg-info"><h4>Max Profit / Loss For Per Trade</h4></th>
-                    <th class="bg-success"><?php echo "<h4>Max Profit Per Trade : " . $setupAnalysis["final_analytics"]["max_profit_per_trade"]["pnl"] . "</h4>"; ?></th>
-                    <th class="bg-danger"><?php echo "<h4>Max Loss Per Trade : " . $setupAnalysis["final_analytics"]["max_loss_per_trade"]["pnl"] . "</h4>"; ?></th>
+                    <th class="bg-info"><h4>Max Profit / Loss In A Trade</h4></th>
+                    <th class="bg-success"><?php echo "<h4>Profit : " . $setupAnalysis["final_analytics"]["max_profit_per_trade"]["pnl"] . "</h4>"; ?></th>
+                    <th class="bg-danger"><?php echo "<h4>Loss : " . $setupAnalysis["final_analytics"]["max_loss_per_trade"]["pnl"] . "</h4>"; ?></th>
+                </tr>
+                <tr>
+                    <th class="bg-info"><h4>Max Profit / Loss In A Day</h4></th>
+                    <th class="bg-success"><?php echo "<h4>Profit : " . $setupAnalysis["final_analytics"]["max_profit_per_day"]["profit"] . "</h4>"; ?></th>
+                    <th class="bg-danger"><?php echo "<h4>Loss : " . $setupAnalysis["final_analytics"]["max_loss_per_day"]["loss"] . "</h4>"; ?></th>
                 </tr>
                 <tr>
                     <th class="bg-info"><h4>Final Analytics : </h4></th>
