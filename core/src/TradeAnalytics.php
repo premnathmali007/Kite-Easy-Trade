@@ -48,7 +48,7 @@ class TradeAnalytics
                     $overall["short_losses"] = $overall["short_losses"] + 1;
                 }
             }
-            $tradePnl = ((int)$trade["points"] * (int)$trade["qty"]) - self::BROKERAGE;
+            $tradePnl = ((int)$trade["points"] * (int)$qty) - self::BROKERAGE;
             $tradesPnl[] = $tradePnl;
             $dateWisePNL[$trade["date"]] = isset($dateWisePNL[$trade["date"]]) ? $dateWisePNL[$trade["date"]] + $tradePnl : $tradePnl;
             $overall["max_profit"] = $tradePnl > $overall["max_profit"] ? $tradePnl : $overall["max_profit"];
