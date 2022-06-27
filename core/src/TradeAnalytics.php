@@ -204,7 +204,7 @@ class TradeAnalytics
         $overall["total_trades"] = count($allTrades);
         $overall["winrate"] = round($overall["wins"] / $overall["total_trades"] * 100, 2);
         $overall["long_winrate"] = round($overall["long_wins"] / $overall["long_trades"] * 100, 2);
-        $overall["short_winrate"] = round($overall["short_winrate"] / $overall["short_trades"] * 100, 2);
+        $overall["short_winrate"] = round($overall["short_wins"] / $overall["short_trades"] * 100, 2);
         $overall["final_analytics"]["max_profit_per_trade"]["pnl"] = max($tradesPnl); //$overall["max_profit"];
         $overall["final_analytics"]["max_loss_per_trade"]["pnl"] = min($tradesPnl);//$overall["max_loss"];
         $overall["final_analytics"]["max_profit_per_day"]["profit"] = max($dateWisePNL);
