@@ -9,7 +9,7 @@ $type = $result["type"];
 
 <div class="container mt-3" >
     <form name="frm-analytics"
-          action="<?php echo $urlInterface->getBaseUrl() . '?&show=trade_analytics&type='.$type;?>"
+          action="<?php echo $urlInterface->getBaseUrl() . '?&show=daily_trade_analytics&type='.$type;?>"
           method="POST" enctype="multipart/form-data" class="p-5 border border-primary">
         <div class="mb-3">
             <label for="qty" class="form-label">Qty</label>
